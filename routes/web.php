@@ -10,8 +10,12 @@ use App\Services\TaskService;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['name' => 'azarcon1-app']);
 });
+
+Route::get('/users',[UserController::class,'index']);
+
+Route::resource('products', productController::class);
 
 Route::get('/test-container',function(Request $request){
     $input = $request->input('key');
@@ -74,10 +78,10 @@ Route::post('/token', function (Request $request){
 });
 
 //Controller -> Middleware
-Route::get('/users',[UserController::class,'index'])->middleware('user-middleware');
+//Route::get('/users',[UserController::class,'index'])->middleware('user-middleware');
 
 //Resource
-Route::resource('products',productController::class);
+//Route::resource('products',productController::class);
 
 //VIEW WITH DATA
 Route::get('/product-list',function(ProductService $productService){
